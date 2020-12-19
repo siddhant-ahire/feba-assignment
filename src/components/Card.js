@@ -51,7 +51,7 @@ const Card = ({image,city,price,rating,name,type}) => {
       </div>
     <Modal show={isOpen} onHide={close}>
                 <Modal.Header>
-                    <Modal.Title>New Chat Room</Modal.Title>
+                    <Modal.Title>Fill Form</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                 <Form 
