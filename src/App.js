@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/alt-text */
 import React from 'react'
 import { Col, Container, Grid, Row,  } from 'rsuite';
 import 'rsuite/dist/styles/rsuite-default.css';
