@@ -1,78 +1,70 @@
+/* eslint-disable jsx-a11y/alt-text */
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react'
-import { Col, Container, Grid, Row,  } from 'rsuite';
+import { Affix, Button, Col, Container, Content, Divider, Footer, Grid, Header, Nav, Navbar, Row, } from 'rsuite';
 import 'rsuite/dist/styles/rsuite-default.css';
 import Card from './components/Card';
-import './styles/main.scss'
-
-const card1 = {
-      image:'https://images.indianexpress.com/2020/07/bridal-makeup-dos-and-donts_759.jpg',
-      tag:'SUPER VENDOR',
-      city:'Mumbai',
-      name:'Jssmakeuovers',
-      price:15000,
-      type:'Bridal Makeup',
-      rating:5.2
-}
-const card2 = {
-  image:'https://static-bebeautiful-in.unileverservices.com/easy-bridal-makeup-look-for-an-indian-wedding-600x350-picmobhome.jpg',
-  tag:'SUPER VENDOR',
-  city:'Jaipur',
-  name:'jasmin',
-  price:15000,
-  type:'Bridal Makeup',
-  rating:5.7
-}
-const card3 = {
-  image:'https://www.avcj.com/IMG/450/22450/india-cosmetics-makeup-580x358.jpeg?1554262311',
-  tag:'SUPER VENDOR',
-  city:'Pune',
-  name:'radhika',
-  price:14000,
-  type:'Bridal Makeup',
-  rating:5.6
-}
-const card4 = {
-  image:'https://assets.vogue.in/photos/5ce42bc21dc2678296c78aae/master/pass/bridal-makeup-tips-images-wedding-makeup-tips.jpg',
-  tag:'SUPER VENDOR',
-  city:'aligad',
-  name:'siri',
-  price:15000,
-  type:'Bridal Makeup',
-  rating:5.6
-}
-const card5 = {
-  image:'https://im.idiva.com/content/2019/Mar/idiva_products-from-abh_lead1_980x457.jpg',
-  tag:'SUPER VENDOR',
-  city:'melbourne',
-  name:'tesajji',
-  price:1600,
-  type:'Bridal Makeup',
-  rating:6.6
-}
+import CARD_DATA from './card.data';
+import Drawere from './components/Drawer';
+import logo from './images/logo.png';
+import './styles/utility.scss'
 
 function App() {
-
   return (
-    <Container>
-      <Grid fluid>
-        <Row className="mt-3">
-          <Col md={6} sm={8}>
-            <Card {...card1}/>  
-          </Col>    
-          <Col md={6} sm={8}>
-            <Card {...card2}/>  
-          </Col>
-          <Col md={6} sm={8}>
-            <Card {...card3}/>  
-          </Col>
-          <Col md={6} sm={8}>
-            <Card {...card4}/>  
-          </Col>  
-          <Col md={6} sm={8}>
-            <Card {...card5}/>  
-          </Col> 
-        </Row>
-      </Grid>
+    <Container >
+      <Header>
+        <Navbar appearance="inverse" style={{ display: "flex", alignItems: 'center', backgroundColor: "white", borderBottom: 1, borderBottomWidth: 1, borderBottomColor: '#e5e5e5', borderBottomStyle: 'solid', minHeight: 66 }}>
+          <Navbar.Header style={{ marginLeft: 20, display: 'flex', alignItems: 'center' }}>
+            <Drawere />
+            <img src={logo} style={{ width: 55, height: 26, marginLeft: 20 }} />
+            <span style={{ color: '#333333', fontSize: 28, marginLeft: 10, fontWeight: "bold" }}>Feba</span>
+          </Navbar.Header>
+        </Navbar>
+        <Affix>
+          <Nav appearance="subtle" style={{ display: "flex", alignItems: 'center', backgroundColor: "white", borderBottom: 1, borderBottomWidth: 1, borderBottomColor: '#e5e5e5', borderBottomStyle: 'solid', minHeight: 66 }}>
+            <Nav.Item>
+              <Button style={{ borderRadius: 20, height: 40, border: "1px solid #e5e5e5", backgroundColor: "transparent" }}>
+                <span style={{ fontSize: 15 }}>City: All</span>
+              </Button>
+            </Nav.Item>
+            <Nav.Item>
+              <Button style={{ borderRadius: 20, height: 40, border: "1px solid #e5e5e5", backgroundColor: "transparent" }}>
+                <span style={{ fontSize: 15 }}>Category: Bridal Makeup Artist</span>
+              </Button>
+            </Nav.Item>
+          </Nav>
+        </Affix>
+      </Header>
+      <Content>
+
+        <Grid fluid>
+          <Row>
+            <Col>
+              <div style={{ paddingLeft: 20, marginTop: 20 }}>
+                <span style={{ fontSize: 17, fontWeight: 'bold' }}>
+                  Bridal Makeup Artist
+            </span><br />
+                <p style={{ fontSize: 15 }}>
+                  Showing <span style={{ fontWeight: 'bold' }}>170+ results</span>
+                </p>
+              </div>
+            </Col>
+          </Row>
+          <Row className="mt-3">
+            {
+              CARD_DATA.map(({ id, ...otherCollectionProps }) => (
+                <Col md={6} sm={8} key={id}>
+                  <Card {...otherCollectionProps} />
+                </Col>
+              ))
+            }
+          </Row>
+        </Grid>
+      </Content>
+      <Footer style={{ textAlign: 'center', paddingBottom: 30 }}>
+        <Divider />
+        <h5> Copyright &#169; House Of Couton </h5>
+      </Footer>
     </Container>
   );
 }

@@ -2,6 +2,24 @@ $indent_1: 5px;
 $indent_2: 10px;
 $indent_3: 15px;
 
+body {
+  margin: 0;
+  font-family: 'Raleway',-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  background-color: #fcfcfc;
+}
+
+html,
+body,
+#root,
+#root > div {
+  height: 100%;
+}
+
 .link-unstyled {
   &,
   &:visited,
@@ -118,8 +136,10 @@ $indent_3: 15px;
   padding: 10px;
 }
 .image{
+  width: 320px;
+  height: 205px;
   max-width: 100%;
-  height: 200px;
+  max-height: 100%;
   border-radius: 5px;
 }
 
@@ -225,6 +245,10 @@ $indent_3: 15px;
 .ml-auto {
   margin-left: auto;
   display: block;
+}
+.mr-auto {
+  margin-right: auto;
+  
 }
 
 .mr-1 {
