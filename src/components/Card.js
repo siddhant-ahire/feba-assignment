@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/alt-text */
 import React, { useCallback, useRef, useState } from 'react'
 import { Alert, Button, ControlLabel, Form, FormControl, FormGroup, HelpBlock, Icon, Modal, Panel, Schema } from 'rsuite';
 import Tag from 'rsuite/lib/Tag/Tag';
