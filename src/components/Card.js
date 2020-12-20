@@ -48,7 +48,7 @@ const Card = ({ image, city, price, rating, name, type }) => {
 
     return (
         <div className="componentClass" style={{ display: 'flex', justifyContent: 'center', height: 360 }}>
-            <Panel bodyFill style={{ display: 'inline-block', cursor: "pointer", position: 'relative', Width: 449 }} onClick={cardSize} >
+            <Panel bodyFill style={{ display: 'inline-block', cursor: "pointer", position: 'relative', maxWidth: 449 }} onClick={cardSize} >
                 <img src={image} className="image" />
                 <Icon icon="gittip" size="3x" style={{ color: '#FFFFFFE6', position: 'absolute', right: 20, top: 10 }} />
                 <div className="ml-1">

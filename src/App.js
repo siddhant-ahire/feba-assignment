@@ -53,7 +53,7 @@ function App() {
           <Row className="mt-3">
             {
               CARD_DATA.map(({ id, ...otherCollectionProps }) => (
-                <Col md={6} sm={8} key={id}>
+                <Col lg={6} md={8} sm={12} key={id}>
                   <Card {...otherCollectionProps} />
                 </Col>
               ))
