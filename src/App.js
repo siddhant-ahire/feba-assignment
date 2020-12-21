@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 
 import React from 'react'
 import { Affix, Button, Col, Container, Content, Divider, Footer, Grid, Header, Nav, Navbar, Row, } from 'rsuite';
