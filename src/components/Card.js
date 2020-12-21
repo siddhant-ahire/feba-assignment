@@ -3,12 +3,15 @@ import { Alert, Button, ControlLabel, Form, FormControl, FormGroup, HelpBlock, I
 import Tag from 'rsuite/lib/Tag/Tag';
 import { useMediaQuery, useModalState } from '../custom-hooks';
 
-const { StringType } = Schema.Types;
-
+const {StringType, DateType} = Schema.Types;
 const model = Schema.Model({
-    name: StringType().isRequired('Chat name is required'),
-    description: StringType().isRequired('Description is required')
-})
+    name: StringType().isRequired('This field is required.'),
+    email:StringType()
+        .isEmail('Please enter a valid email address.')
+        .isRequired('This field is required'),
+    dob:DateType().isRequired('please select date')
+});
+
 const INITIAL_VALUE = {
     name: '',
     email: '',
@@ -21,20 +24,38 @@ const Card = ({ image, city, price, rating, name, type }) => {
     const [formValue, setFormValue] = useState(INITIAL_VALUE);
     const isMobile = useMediaQuery('(max-width: 992px)');
 
-    // const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
     const formRef = useRef();
     const onFormChange = useCallback((value) => {
         setFormValue(value);
     }, [])
 
-    const onSubmit = (ev) => {
-        if (ev.type === 'click') {
-            setFormValue(INITIAL_VALUE)
-            Alert.success('Data submited successfully', 4000);
+
+    
+    const API_BASE_URL = 'https://feba-assignment-api.herokuapp.com/email';
+    const onSubmit = async() => {
+        if(!formRef.current.check()){
+            return;
         }
+        setIsLoading(true)
+            const request = {
+                method:'POST',
+                headers:{'Content-Type':'application/json'},
+                body:JSON.stringify(formValue)
+            }
+            const response = await fetch(`${API_BASE_URL}`,request)
+            Promise.resolve(response).then(resp => resp.json())
+            .then((res) => {
+                if(!res.success){
+                    Alert.error(`Error: Data not submited`, 4000)
+                }
+                Alert.success(`data submited successfully`,4000)})
+            .catch((err) => Alert.error(`Error: ${err}`, 4000));
+            setFormValue(INITIAL_VALUE)
+            setIsLoading(false);
     }
 
-    const [size, setSize] = useState('');
+    const [size, setSize] = useState('md');
     const cardSize = () => {
         if (!isMobile) {
             setSize('md')
@@ -44,6 +65,7 @@ const Card = ({ image, city, price, rating, name, type }) => {
         setSize('xs')
         open();
     }
+
 
     return (
         <div className="componentClass" style={{ display: 'flex', justifyContent: 'center', height: 360 }}>
@@ -80,7 +102,7 @@ const Card = ({ image, city, price, rating, name, type }) => {
                     >
                         <FormGroup>
                             <ControlLabel>Name</ControlLabel>
-                            <FormControl name="name" placeholder="Enter name" />
+                            <FormControl name="name" placeholder="Enter name"/>
                             <HelpBlock>Required</HelpBlock>
                         </FormGroup>
                         <FormGroup>
@@ -90,13 +112,13 @@ const Card = ({ image, city, price, rating, name, type }) => {
                         </FormGroup>
                         <FormGroup>
                             <ControlLabel>Date Of Birth</ControlLabel>
-                            <FormControl name="dob" type="date" />
+                            <FormControl name="dob" type="date"/>
                             <HelpBlock>Required</HelpBlock>
                         </FormGroup>
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button appearance="primary" onClick={onSubmit}>
+                    <Button block appearance="primary" onClick={onSubmit} disabled={isLoading}>
                         Submit
                     </Button>
                 </Modal.Footer>
